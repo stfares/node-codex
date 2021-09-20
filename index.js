@@ -17,12 +17,7 @@ const initialPrompt = "<|endoftext|>/* I start with a blank HTML page, and incre
 promptArr.push(initialPrompt)
 
 //#region get codex code start
-
 //route - 
-app.get('/', (req, res) => {
-  res.send('hello world')
-  // res.render('index')
-})
 
 app.get('/clear', (req, res) => {
   promptArr.length = 1
@@ -31,11 +26,11 @@ app.get('/clear', (req, res) => {
   
 })
 
+// Not being used currently
 app.get('/revert', (req, res) => {
   promptArr.pop()
   console.log('reverted', promptArr)
   res.send('reverted previous prompt')
-  
 })
 
 app.post('/remove', (req, res) => {
@@ -44,7 +39,6 @@ app.post('/remove', (req, res) => {
   const response = `removed element at index ${index}`
   console.log(response)
   res.send(response)
-  
 })
 
 app.post('/code', (req, res) => {
@@ -64,7 +58,6 @@ app.post('/code', (req, res) => {
     temperature: 0,
   }
   const url = `https://api.openai.com/v1/engines/davinci-codex/completions`
-
 
   axios({
     url,
@@ -92,7 +85,6 @@ app.post('/code', (req, res) => {
     res.json('error while fetching data')
   })
 })
-
 //#endregion Image upload code end
 
 app.listen(PORT, () => {
